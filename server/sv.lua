@@ -39,6 +39,8 @@ lib.addCommand('givemenu', {
 end)
 
 lib.callback.register('givemenu:getItems', function(source)
+    if not hasPermission(source) then return false end
+
     local items = {}
     
     for itemName, itemData in pairs(exports.ox_inventory:Items()) do
@@ -55,6 +57,8 @@ lib.callback.register('givemenu:getItems', function(source)
 end)
 
 lib.callback.register('givemenu:giveItem', function(source, targetId, itemName, count)
+    if not hasPermission(source) then return false end
+
     local maxCount = tonumber(WariGiveMenu.CountLimit) or 500
     
     if count > maxCount then
